@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_tiktok_clone_code/features/authentication/widgets/auth_button.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../../../constants/sizes.dart';
 import '../../../constants/gaps.dart';
 
@@ -37,31 +35,31 @@ class LoginScreen extends StatelessWidget {
                 textAlign: TextAlign.center,
               ),
               Gaps.v40,
-              AuthButton(
-                icon: FaIcon(FontAwesomeIcons.user),
-                text: "Use email & password",
-              ),
-              Gaps.v10,
-              AuthButton(
-                icon: FaIcon(FontAwesomeIcons.apple),
-                text: "Continue with apple",
-              ),
-              Gaps.v10,
-              AuthButton(
-                icon: FaIcon(FontAwesomeIcons.facebook),
-                text: "Continue with facebook",
-              ),
-              Gaps.v10,
-              AuthButton(
-                icon: FaIcon(FontAwesomeIcons.google),
-                text: "Continue with google",
-              ),
+              // AuthButton(
+              //   icon: FaIcon(FontAwesomeIcons.user),
+              //   text: "Use email & password",
+              // ),
+              // Gaps.v10,
+              // AuthButton(
+              //   icon: FaIcon(FontAwesomeIcons.apple),
+              //   text: "Continue with apple",
+              // ),
+              // Gaps.v10,
+              // AuthButton(
+              //   icon: FaIcon(FontAwesomeIcons.facebook),
+              //   text: "Continue with facebook",
+              // ),
+              // Gaps.v10,
+              // AuthButton(
+              //   icon: FaIcon(FontAwesomeIcons.google),
+              //   text: "Continue with google",
+              // ),
             ],
           ),
         ),
       ),
       bottomNavigationBar: BottomAppBar(
-        color: Colors.grey.shade100,
+        color: Colors.grey.shade50,
         elevation: 1,
         child: Padding(
           padding: const EdgeInsets.symmetric(

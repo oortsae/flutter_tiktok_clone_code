@@ -17,7 +17,7 @@ class SignUpScreen extends StatelessWidget {
     );
   }
 
-  void onLoginBtnTap(BuildContext context) {
+  void _onLoginBtnTap(BuildContext context) {
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => const EmailScreen(),
@@ -52,25 +52,25 @@ class SignUpScreen extends StatelessWidget {
               ),
               Gaps.v40,
               AuthButton(
-                onButtonTap: onLoginBtnTap,
+                onButtonTap: _onLoginBtnTap,
                 icon: const FaIcon(FontAwesomeIcons.user),
                 text: "Use phone or email",
               ),
               Gaps.v10,
               AuthButton(
-                onButtonTap: onLoginBtnTap,
+                onButtonTap: _onLoginBtnTap,
                 icon: const FaIcon(FontAwesomeIcons.apple),
                 text: "Continue with apple",
               ),
               Gaps.v10,
               AuthButton(
-                onButtonTap: onLoginBtnTap,
+                onButtonTap: _onLoginBtnTap,
                 icon: const FaIcon(FontAwesomeIcons.facebook),
                 text: "Continue with facebook",
               ),
               Gaps.v10,
               AuthButton(
-                onButtonTap: onLoginBtnTap,
+                onButtonTap: _onLoginBtnTap,
                 icon: const FaIcon(FontAwesomeIcons.google),
                 text: "Continue with google",
               ),
@@ -79,7 +79,7 @@ class SignUpScreen extends StatelessWidget {
         ),
       ),
       bottomNavigationBar: BottomAppBar(
-        color: Colors.grey.shade100,
+        color: Colors.grey.shade50,
         elevation: 1,
         child: Padding(
           padding: const EdgeInsets.symmetric(
