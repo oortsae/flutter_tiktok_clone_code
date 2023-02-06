@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_tiktok_clone_code/features/authentication/widgets/password_screen.dart';
 
 import '../../../constants/gaps.dart';
 import '../../../constants/sizes.dart';
+import 'form_button.dart';
 
 class EmailScreen extends StatefulWidget {
   const EmailScreen({super.key});
@@ -11,90 +13,102 @@ class EmailScreen extends StatefulWidget {
 }
 
 class _EmailScreenState extends State<EmailScreen> {
-  final TextEditingController _usernameController = TextEditingController();
-  String _username = "";
+  final TextEditingController _emailController = TextEditingController();
+  String _email = "";
 
   @override
   void initState() {
     super.initState();
-    _usernameController.addListener(() {
+    _emailController.addListener(() {
       setState(() {
-        _username = _usernameController.text;
+        _email = _emailController.text;
       });
     });
   }
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          "Sign up",
-        ),
+  void dispose() {
+    _emailController.dispose();
+    super.dispose();
+  }
+
+  String? _isEmailValid() {
+    if (_email.isEmpty) return null;
+    final regExp = RegExp(
+        r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
+    if (!regExp.hasMatch(_email)) {
+      return "Email not vaild";
+    }
+    return null;
+  }
+
+  void _onScaffoldTap() {
+    FocusScope.of(context).unfocus();
+  }
+
+  void _onSubmit() {
+    if (_email.isEmpty || _isEmailValid() != null) return;
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const PasswordScreen(),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(Sizes.size36),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Gaps.v20,
-            const Text(
-              "Create username",
-              style: TextStyle(
-                fontSize: Sizes.size24,
-                fontWeight: FontWeight.w600,
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: _onScaffoldTap,
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text(
+            "Sign up",
+          ),
+        ),
+        body: Padding(
+          padding: const EdgeInsets.all(Sizes.size36),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Gaps.v20,
+              const Text(
+                "What is your email?",
+                style: TextStyle(
+                  fontSize: Sizes.size24,
+                  fontWeight: FontWeight.w600,
+                ),
               ),
-            ),
-            Gaps.v8,
-            const Text(
-              "You can always change this later",
-              style: TextStyle(
-                fontSize: Sizes.size16,
-                color: Colors.black54,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-            Gaps.v16,
-            TextField(
-              controller: _usernameController,
-              decoration: InputDecoration(
-                hintText: "Username",
-                enabledBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(
-                    color: Colors.grey.shade400,
+              Gaps.v16,
+              TextField(
+                controller: _emailController,
+                keyboardType: TextInputType.emailAddress,
+                onEditingComplete: () => _onSubmit(),
+                autocorrect: false,
+                decoration: InputDecoration(
+                  hintText: "Email",
+                  errorText: _isEmailValid(),
+                  enabledBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Colors.grey.shade400,
+                    ),
+                  ),
+                  focusedBorder: UnderlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Colors.grey.shade400,
+                    ),
                   ),
                 ),
-                focusedBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(
-                    color: Colors.grey.shade400,
-                  ),
-                ),
+                cursorColor: Theme.of(context).primaryColor,
               ),
-              cursorColor: Theme.of(context).primaryColor,
-            ),
-            Gaps.v16,
-            FractionallySizedBox(
-              widthFactor: 1,
-              child: AnimatedContainer(
-                duration: const Duration(
-                  milliseconds: 300,
-                ),
-                padding: const EdgeInsets.symmetric(vertical: Sizes.size16),
-                decoration: BoxDecoration(
-                  color: _username.isEmpty
-                      ? Colors.grey.shade300
-                      : Theme.of(context).primaryColor,
-                  borderRadius: BorderRadius.circular(25),
-                ),
-                child: const Text(
-                  "Next",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                      color: Colors.white, fontWeight: FontWeight.w600),
-                ),
+              Gaps.v16,
+              GestureDetector(
+                onTap: _onSubmit,
+                child: FormButton(
+                    disabled: _email.isEmpty || _isEmailValid() != null),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
