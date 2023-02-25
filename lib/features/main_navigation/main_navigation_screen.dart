@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_tiktok_clone_code/constants/sizes.dart';
 import 'package:flutter_tiktok_clone_code/features/main_navigation/widgets/nav_tab.dart';
 import 'package:flutter_tiktok_clone_code/features/main_navigation/widgets/post_video_button.dart';
+import 'package:flutter_tiktok_clone_code/features/videos/video_timeline_screen.dart';
 
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -42,7 +43,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
   void _onPostVideoButtonTap() {
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => Container(),
+        builder: (context) => const Scaffold(),
         fullscreenDialog: true,
       ),
     );
@@ -55,6 +56,19 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
         children: [
           Offstage(
             offstage: _selectedIndex != 0,
+            child: const VideoTimelineScreen(),
+          ),
+          Offstage(
+            offstage: _selectedIndex != 1,
+            child: Container(),
+          ),
+          Offstage(
+            offstage: _selectedIndex != 3,
+            child: Container(),
+          ),
+          Offstage(
+            offstage: _selectedIndex != 4,
+            child: Container(),
           ),
         ],
       ),
